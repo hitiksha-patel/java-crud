@@ -1,5 +1,6 @@
 package com.example.crud_example.service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -28,5 +29,27 @@ public class UserService {
 
     public Optional<User> getUserById(Long id) {
         return userRepository.findById(id);
+    }
+
+    public User updateUser(Long id, User updatedUser) {
+        Optional<User> userOptional = userRepository.findById(id);
+        if (userOptional.isPresent()) {
+            User existingUser = userOptional.get();
+            existingUser.setUsername(updatedUser.getUsername());
+            existingUser.setEmail(updatedUser.getEmail());
+            existingUser.setAddress(updatedUser.getAddress());
+            existingUser.setPhone(updatedUser.getPhone());
+            existingUser.setDateOfBirth(updatedUser.getDateOfBirth());
+            existingUser.setAge(updatedUser.getAge());
+            existingUser.setUpdatedAt(LocalDateTime.now());
+
+            return userRepository.save(existingUser);
+        } else {
+            throw new RuntimeException("Couldn't find user with id " + id);
+        }
+    }
+
+    public void deleteUser(Long id) {
+        userRepository.deleteById(id);
     }
 }
