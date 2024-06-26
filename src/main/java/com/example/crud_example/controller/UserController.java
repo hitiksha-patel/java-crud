@@ -25,13 +25,13 @@ public class UserController {
 
     @PostMapping
     public ResponseEntity<User> createUser(@RequestBody User user) {
-
+        // Set createdAt and updatedAt timestamps
         LocalDateTime currentDateTime = LocalDateTime.now();
         user.setCreatedAt(currentDateTime);
         user.setUpdatedAt(currentDateTime);
 
         User savedUser = userService.saveUser(user);
-        return ResponseEntity.status(HttpStatus.CREATED).body(savedUser);
+        return ResponseEntity.ok(savedUser);
     }
 
     @GetMapping
