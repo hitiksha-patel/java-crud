@@ -23,6 +23,21 @@ public class UserController {
         this.userService = userService;
     }
 
+    @PostMapping("/register")
+    public ResponseEntity<User> registerUser(@RequestBody User user) {
+        // Validate input (optional)
+
+        // Set createdAt and updatedAt timestamps
+        LocalDateTime currentDateTime = LocalDateTime.now();
+        user.setCreatedAt(currentDateTime);
+        user.setUpdatedAt(currentDateTime);
+
+        // Save the user using the UserService
+        User savedUser = userService.saveUser(user);
+
+        return ResponseEntity.ok(savedUser);
+    }
+
     @PostMapping
     public ResponseEntity<User> createUser(@RequestBody User user) {
         // Set createdAt and updatedAt timestamps

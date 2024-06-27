@@ -23,6 +23,7 @@ public class User {
     private String phone;
     private LocalDate dateOfBirth;
     private Integer age;
+    private String password;
 
     @Column(name = "created_at")
     private LocalDateTime createdAt;
@@ -33,13 +34,14 @@ public class User {
     public User() {
     }
     
-    public User(String username, String email, String address, String phone, LocalDate dateOfBirth, Integer age) {
+    public User(String username, String email, String address, String phone, LocalDate dateOfBirth, Integer age, String password) {
         this.username = username;
         this.email = email;
         this.address = address;
         this.phone = phone;
         this.dateOfBirth = dateOfBirth;
         this.age = age;
+        this.password = password;
     }
 
     public Long getId() {
@@ -96,6 +98,14 @@ public class User {
 
     public void setAge(Integer age) {
         this.age = age;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public LocalDateTime getCreatedAt() {
